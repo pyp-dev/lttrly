@@ -1,4 +1,4 @@
-export { getCategoryNames, getRandomCategory, getRandomLetter };
+export { getRandomCategories, getRandomCategory, getRandomLetter };
 
 const categories = [
     ['vowels', ['a','e','i','o','u']],
@@ -47,7 +47,17 @@ const categories = [
 function getCategoryNames(){
     return [...categories.keys()];
 }
-function getRandomCategory(){
+
+function getRandomCategories(){
+    const chosen = new Set()
+    for(let i = 0; i<10; i++){
+        chosen.add(categories[Math.floor(Math.random()*categories.length)]);
+    }
+    
+    return Array.from(chosen);
+}
+
+function getRandomCategory(categories){
     return categories[Math.floor(Math.random()*categories.length)];
 }
 

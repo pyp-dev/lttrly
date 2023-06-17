@@ -1,9 +1,12 @@
-import { getRandomCategory, getRandomLetter } from "./letters.js";
+import {getRandomCategories, getRandomCategory, getRandomLetter} from "./letters.js";
 
+let categories = null;
 let categoryName = null;
 let categoryValues = null;
 let letter = null;
 let remaining = 5;
+let wins = 0
+let games = 0
 
 function createGuesses(){
     const guesses = document.getElementById('guesses');
@@ -71,6 +74,12 @@ function displayResult(won){
     result.innerText = `You ${won ? 'Won!' : 'Lost.'} The category was ${categoryName}, and the letter was ${letter.toUpperCase()}.`;
     result.style.color = won ? 'green' : 'red';
     result.style.visibility = 'visible';
+    updateRecord(won);
+}
+
+function resetCategories(){
+    const cats = document.getElementById('categories');
+    cats.innerText = '';
 }
 
 function resetGuesses(){
@@ -99,16 +108,43 @@ function resetKeyboard(){
     }
 }
 
-function setupGame(){
-    [categoryName, categoryValues] = getRandomCategory();
+function updateRecord(won){
+    games++;
+    wins += won ? 1 : 0;
+    document.getElementById('record').innerText = `${wins}/${games}`;
+}
+
+function chooseLetter(){
+    categories = getRandomCategories();
+    [categoryName, categoryValues] = getRandomCategory(categories);
     letter = getRandomLetter(categoryValues);
+    
+    const cats = document.getElementById('categories');
+    const list = document.createElement('ul');
+    for(let x of categories){
+        let element = document.createElement('li');
+        element.innerText = x[0];
+        element.classList.add('category', 'include');
+        element.addEventListener('click', e => {
+            let included = e.target.classList.contains('include');
+            e.target.classList.add(included ? 'exclude' : 'include');
+            e.target.classList.remove(included ? 'include' : 'exclude');
+        });
+        list.appendChild(element);
+    }
+    
+    cats.appendChild(list);
+}
+
+function setupGame(){
+    chooseLetter();
     createGuesses();
     createKeyboard();
 }
 
 function newGame(){
-    [categoryName, categoryValues] = getRandomCategory();
-    letter = getRandomLetter(categoryValues);
+    resetCategories();
+    chooseLetter();
     resetGuesses();
     resetResult();
     resetKeyboard();
