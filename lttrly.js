@@ -1,9 +1,10 @@
-import { getRandomCategories, getRandomCategory, getRandomWord, getRandomLetter } from "./letters.js";
+import { getRandomCategories, getRandomCategory, getRandomValue } from "./letters.js";
 
 let categories = null;
 let categoryName = null;
 let categoryValues = null;
-let word = null
+let categoryLetters = null;
+let value = null
 let letter = null;
 let remaining = 5;
 let wins = 0
@@ -87,7 +88,7 @@ function resetKeyboard(){
 //
 function displayResult(won){
     const result = document.getElementById('result');
-    result.innerText = `You ${won ? 'Won!' : 'Lost.'} The category was ${categoryName}, and the letter was ${word.length===1 ? letter : '['+letter+']'+word.slice(1)}.`;
+    result.innerText = `You ${won ? 'Won!' : 'Lost.'} The category was ${categoryName}, and the letter was ${letter + (value!==letter ? '['+value.slice(1)+']' : '')}.`;
     result.style.color = won ? 'green' : 'red';
     result.style.visibility = 'visible';
     updateRecord(won);
@@ -108,8 +109,9 @@ function updateRecord(won){
 function chooseLetter(){
     categories = getRandomCategories();
     [categoryName, categoryValues] = getRandomCategory(categories);
-    word = getRandomWord(categoryValues)
-    letter = getRandomLetter(word);
+    categoryLetters = categoryValues.map(x=>x[0]);
+    value = getRandomValue(categoryValues);
+    letter = value[0];
 
     const cats = document.getElementById('categories');
     const list = document.createElement('ul');
@@ -137,14 +139,14 @@ function checkGuess(){
     let guess = document.getElementsByClassName('guess')[5 - remaining];
     let key = findKey(guess.innerHTML);
 
-    if(guess.innerHTML == letter){
+    if(guess.innerHTML === letter){
         guess.classList.add('correct');
         key.classList.add('correct');
         displayResult(true);
         remaining = 0;
         return;
     }
-    else if(categoryValues.includes(guess.innerHTML)){
+    else if(categoryLetters.includes(guess.innerHTML)){
         guess.classList.add('close');
         key.classList.add('close');
     }
@@ -163,7 +165,7 @@ function findKey(key){
     const keys = document.getElementsByClassName('key');
 
     for(let i = 0; i<keys.length; i++){
-        if(keys[i].innerHTML == key){
+        if(keys[i].innerHTML === key){
             return keys[i];
         }
     }
@@ -188,7 +190,9 @@ function guessedAlready(letter){
 // Initialize Game
 //
 function restartGame(){
-    updateRecord();
+    if(remaining>0){
+        updateRecord();
+    }
     resetDisplay();
     chooseLetter();
 }
@@ -197,7 +201,6 @@ function firstGame(){
     createDisplay();
     chooseLetter();
 }
-
 
 
 
@@ -220,6 +223,7 @@ document.getElementById('keyboard').addEventListener('click', e => {
 document.getElementById('newgame').addEventListener('click', e => {
     restartGame();
 })
+
 
 
 //
