@@ -26,7 +26,7 @@ const categories = [
     ['Dallas Sports Teams', ['Cowboys','Mavericks','Stars','Rangers']],
     ['New Orleans Sports Teams', ['Saints','Pelicans']],
     ['Houston Sports Teams', ['Texans','Rockets','Astros']],
-    ['Phoenix Sports Teams', ['Cardinals','Suns','Coyotes','Diamondbacks']],
+    ['Phoenix Sports Teams', ['Cardinals','Suns','Diamondbacks']],
     ['Denver Sports Teams', ['Broncos','Nuggets','Avalanche','Rockies']],
     ['Kansas City Sports Teams', ['Chiefs','Royals']],
     ['Indianapolis Sports Teams', ['Colts','Pacers']],
@@ -43,19 +43,22 @@ const categories = [
     ['Seasons', ['Spring','Summer','Winter','Fall']],
     ['Great Lakes', ['Superior','Michigan','Huron','Erie','Ontario']],
     ['Oceans', ['Pacific','Atlantic','Indian','Southern','Arctic']],
-    ['Continents', ['Asia','Africa','North America','South America','Antarctica','Europe','Austrlia']],
+    ['Continents', ['Asia','Africa','North America','South America','Antarctica','Europe','Australia']],
     ['Card Suits', ['Clubs','Spades','Hearts','Diamonds']],
     ['U.S. Coins', ['Penny','Nickel','Dime','Quarter','Half Dollar','Dollar']],
     ['U.S. Paper Money', ['One','Two','Five','Ten','Twenty','Fifty','One Hundred']],
     ['Four Corner States', ['Utah','Colorado','New Mexico','Arizona']],
     ['Lucky\'s Charms', ['Heart','Star','Horseshoe','Clover','Blue Moon','Unicorn','Rainbow','Red Balloon']],
-    ['Countries of North America', ['Canada','United States','Mexico']],
+    ['Mainland Countries of North America', ['Canada','United States','Mexico']],
     ['Automatic Car Gears', ['Park','Reverse','Drive','Neutral']],
     ['Chess Pieces', ['King','Queen','Bishop','Knight','Rook','Pawn']],
     ['U.S. Flag Colors', ['Red','White','Blue']],
     ['Tic-Tac-Toe Symbols', ['X','O']],
     ['Seattle Sports Teams', ['Seahawks','Kraken','Mariners']],
-    ['Original Monopoly Pieces', ['Battleship','Boot','Cannon','Thimble','Top Hat','Iron']]
+    ['Original Monopoly Pieces', ['Battleship','Boot','Cannon','Thimble','Top Hat','Iron']],
+    ['Main U.S. Political Parties', ['Democratic','Republican']],
+    ['Days of the Week', ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday']],
+    ['Months of the Year', ['January','February','March','April','May','June','July','August','September','October','November','December']]
 ];
 
 function getCategoryNames(){
